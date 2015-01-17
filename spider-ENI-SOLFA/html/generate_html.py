@@ -22,9 +22,9 @@ def generate_html():
 
     list_dir = os.listdir("../graphs/img")
     for dir_ in list_dir:
-        page.img(src="../graphs/img/"+dir_)
+        page.img(src="../../graphs/img/"+dir_)
 
-    with open("informe_extensiones.html", 'w') as new_file:
+    with open("./files/informe_extensiones.html", 'w') as new_file:
         new_file.write(str(page))
 
     for domain in domains:
@@ -39,7 +39,7 @@ def generate_html():
             page.br()
             page.br()
 
-        with open(domain+'.html', 'w') as new_file:
+        with open("./files/"+domain+".html", 'w') as new_file:
             new_file.write(str(page))
 
 def extract_json_links():
