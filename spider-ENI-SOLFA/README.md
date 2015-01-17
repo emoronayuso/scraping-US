@@ -4,7 +4,7 @@ Informe para el cumplimiento del Esquema Nacional de Interoperabilidad (ENI) en 
 Esta aplicación genera un informe en formato html de los tipos de enlaces a documentos generados en cada uno de los dominios de la Universidad de Sevilla.
 
 
-#PASOS PARA LA INSTALACIÓN Y LA EJECUCIÓN DEL SCRIPT
+PASOS PARA LA INSTALACIÓN Y LA EJECUCIÓN DEL SCRIPT
 
 1) INSTALAR  el framework scrapy usando pip, y las librerias matplotlib:
 
