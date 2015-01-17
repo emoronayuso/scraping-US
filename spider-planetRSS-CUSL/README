@@ -1,0 +1,13 @@
+
+
+Script que genera un json con los enlaces de los RSS de todos los proyectos de los participantes, y sirve de ayudo para genera el planet de la web del CUSL
+
+1) INSTALAR el framework scrapy y sus dependencias con pip:
+
+    $ sudo pip install Scrapy
+
+    - Dependencias: python2.7, setuptools, lxml, pyOpenSSL
+
+2) EJECUTAR el script con scrapy "gen_list_rss.py" y guardando su salida en un fichero JSON llamado "list_rss.json"
+
+    $ scrapy runspider gen_list_rss.py -o list_rss.json
