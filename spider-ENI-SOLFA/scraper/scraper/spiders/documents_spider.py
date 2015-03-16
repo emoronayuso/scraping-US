@@ -14,13 +14,30 @@ class Documents_spider(CrawlSpider):
             'investigacion.us.es',
             'vtt.us.es'
             'internacional.us.es',
-            'docentes.us.es']
+            'docentes.us.es',
+            'sede.us.es',
+            'recursoshumanos.us.es',
+            'cfp.us.es',
+            'sacu.us.es',
+            'bib.us.es',
+            'sav.us.es',
+            'campusdeexcelencia.us.es'
+            ]
+
     start_urls = ['http://estudiantes.us.es',
             #'http://www.doctorado.us.es',
             'http://investigacion.us.es',
             'http://vtt.us.es'
             'http://www.internacional.us.es',
-            'http://docentes.us.es']
+            'http://docentes.us.es',
+            'http://sede.us.es',
+            'http://recursoshumanos.us.es/',
+            'http://www.cfp.us.es/',
+            'http://sacu.us.es/',
+            #'http://bib.us.es/',
+            'http://www.sav.us.es/',
+            'http://campusdeexcelencia.us.es/'
+            ]
     denied_locations = ['repositorio-tesis', 'sisius',
             'contenido/utils/codigos.php', 'calendario']
     rules = (

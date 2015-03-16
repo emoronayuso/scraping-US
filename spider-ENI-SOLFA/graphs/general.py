@@ -44,7 +44,7 @@ def generate_graphs():
     domains,total = extract_json_data()
     for domain in domains:
 
-        del domains[domain]['pdf']
+        #del domains[domain]['pdf']
 
         rects = plt.bar(range(len(domains[domain].keys())),
                 domains[domain].values(), align='center', facecolor='#FE9A2E')
