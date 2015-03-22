@@ -39,6 +39,25 @@ def extract_json_data():
     return domains, total
 
 
+# Function map_color_type_link: recommended (re), no recommended (no_re), standard (st), no standard (no_st)
+# return RGB color
+def map_color_type_link(exten):
+    map_group = {    're': {'color': "#7DD7FD", 'ext': ['pdf']},
+                  'no_re': {'color': "#FA964A", 'ext': ['docx', 'xlsx', 'pptx']},
+                     'st': {'color': "#6BE666", 'ext': ['odt', 'ods', 'odg', 'odp']},            
+                  'no_st': {'color': "#EF5555", 'ext': ['doc', 'xls', 'ppt']}  
+                }
+    
+    for group_ext in map_group.keys():
+        for ext in map_group[group_ext]['ext']:
+#            print "---- extension "+ ext + " CON " + exten
+            if exten == ext:
+                return map_group[group_ext]['color']
+
+    return "#FFFFAA"
+
+
+
 def generate_graphs():
 
     domains,total = extract_json_data()
@@ -46,16 +65,35 @@ def generate_graphs():
 
         #del domains[domain]['pdf']
 
+#        rects = plt.bar(range(len(domains[domain].keys())),
+#                domains[domain].values(), align='center', facecolor='#FE9A2E')
+
+#        bar_color
+
+#        barlist=plt.bar([1,2,3,4], [1,2,3,4])
+#        barlist[0].set_color('r')
+
         rects = plt.bar(range(len(domains[domain].keys())),
-                domains[domain].values(), align='center', facecolor='#FE9A2E')
+                domains[domain].values(), align='center')
+
+
 
         plt.xticks(range(len(domains[domain].keys())), domains[domain].keys())
 
         plt.title(str(domain))
+
+        count = 0
         for rect in rects:
             height = rect.get_height()
             plt.text(rect.get_x()+rect.get_width()/2., int(height), '%d'% int(height),
                     ha='center')
+
+            extension_ = domains[domain].keys()[count]
+
+            rect.set_color(map_color_type_link(extension_))
+            #print map_color_type_link(domains[domain].get(count))
+            count += 1
+
         
         plt.ylabel("Cantidad de ficheros")
 
