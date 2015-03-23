@@ -1,9 +1,13 @@
-#!/usr/bin/python
+#/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import matplotlib
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import json
 import re
+
+root_directory = '/home/kike/scraping-US/spider-ENI-SOLFA/'
 
 def document_format(link):
     match = re.search('(?<=\.)\w+$', link)
@@ -13,7 +17,7 @@ def document_format(link):
         return False
 
 def extract_json_data():
-    with open('../scraper/documents.json') as data_file:
+    with open(root_directory+'scraper/documents.json') as data_file:
         data = json.load(data_file)
 
     extensions = ['xls', 'xlsx', 'ppt', 'pptx', 'doc', 'docx', 'odt', 'ods',
@@ -50,7 +54,6 @@ def map_color_type_link(exten):
     
     for group_ext in map_group.keys():
         for ext in map_group[group_ext]['ext']:
-#            print "---- extension "+ ext + " CON " + exten
             if exten == ext:
                 return map_group[group_ext]['color']
 
@@ -61,26 +64,25 @@ def map_color_type_link(exten):
 def generate_graphs():
 
     domains,total = extract_json_data()
+
+    del domains['www.mediacioncivilymercantil.cfp.us.es']
+
     for domain in domains:
 
         #del domains[domain]['pdf']
 
-#        rects = plt.bar(range(len(domains[domain].keys())),
-#                domains[domain].values(), align='center', facecolor='#FE9A2E')
-
-#        bar_color
-
-#        barlist=plt.bar([1,2,3,4], [1,2,3,4])
-#        barlist[0].set_color('r')
-
         rects = plt.bar(range(len(domains[domain].keys())),
                 domains[domain].values(), align='center')
-
-
 
         plt.xticks(range(len(domains[domain].keys())), domains[domain].keys())
 
         plt.title(str(domain))
+
+        st_patch = mpatches.Patch(color='#6BE666', label="Est"+u"á"+"ndar")
+        no_st_patch = mpatches.Patch(color='#EF5555', label="No est"+u"á"+"ndar")
+        re_patch = mpatches.Patch(color='#7DD7FD', label="Recomendado")
+        no_re_patch = mpatches.Patch(color='#FA964A', label='No recomendado')
+        plt.legend(loc=2, handles=[st_patch, no_st_patch, re_patch, no_re_patch])
 
         count = 0
         for rect in rects:
@@ -91,7 +93,6 @@ def generate_graphs():
             extension_ = domains[domain].keys()[count]
 
             rect.set_color(map_color_type_link(extension_))
-            #print map_color_type_link(domains[domain].get(count))
             count += 1
 
         
@@ -99,7 +100,7 @@ def generate_graphs():
 
         plt.ylim(0.0,plt.ylim()[1]+2)
 
-        plt.savefig('img/grafica_de_'+domain+'.png')
+        plt.savefig(root_directory+'html/files/graphs/grafica_de_'+domain+'.png')
 
         plt.close()
 
